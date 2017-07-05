@@ -2,10 +2,12 @@ package com.zhy.autolayout;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.zhy.autolayout.attr.Attrs;
 import com.zhy.autolayout.attr.AutoAttr;
+import com.zhy.autolayout.attr.GridHorizontalSpacingAttr;
 import com.zhy.autolayout.attr.HeightAttr;
 import com.zhy.autolayout.attr.MarginBottomAttr;
 import com.zhy.autolayout.attr.MarginLeftAttr;
@@ -22,6 +24,7 @@ import com.zhy.autolayout.attr.PaddingTopAttr;
 import com.zhy.autolayout.attr.TextSizeAttr;
 import com.zhy.autolayout.attr.WidthAttr;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,9 +144,27 @@ public class AutoLayoutInfo
                 autoLayoutInfo.addAttr(TextSizeAttr.generate((int) ((TextView) view).getTextSize(), base));
             }
         }
+
+        if(view instanceof GridView)
+        {
+            autoLayoutInfo.addAttr(GridHorizontalSpacingAttr.generate(
+                    getHorizontalSpacing((GridView) view), base
+            );
+        }
         return autoLayoutInfo;
     }
 
+    private static int getHorizontalSpacing(GridView gridView){
+        try {
+            Field field = gridView.getClass().getDeclaredField("mHorizontalSpacing");
+            field.setAccessible(true);
+            return field.getInt(gridView);
+        } catch (IllegalAccessException e) {
+            return gridView.getHorizontalSpacing();
+        } catch (NoSuchFieldException e) {
+            return gridView.getHorizontalSpacing();
+        }
+    }
 
     @Override
     public String toString()

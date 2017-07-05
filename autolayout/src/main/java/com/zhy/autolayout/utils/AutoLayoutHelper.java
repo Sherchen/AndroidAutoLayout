@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 
 import com.zhy.autolayout.AutoLayoutInfo;
 import com.zhy.autolayout.R;
+import com.zhy.autolayout.attr.GridHorizontalSpacingAttr;
 import com.zhy.autolayout.attr.HeightAttr;
 import com.zhy.autolayout.attr.MarginAttr;
 import com.zhy.autolayout.attr.MarginBottomAttr;
@@ -66,7 +67,7 @@ public class AutoLayoutHelper
                     android.R.attr.maxHeight,//
                     android.R.attr.minWidth,//
                     android.R.attr.minHeight,//16843072
-
+                    android.R.attr.horizontalSpacing
 
             };
 
@@ -87,6 +88,7 @@ public class AutoLayoutHelper
     private static final int INDEX_MAX_HEIGHT = 14;
     private static final int INDEX_MIN_WIDTH = 15;
     private static final int INDEX_MIN_HEIGHT = 16;
+    private static final int INDEX_HORIZONTAL_SPACING = 17;
 
 
     /**
@@ -218,6 +220,9 @@ public class AutoLayoutHelper
                     break;
                 case INDEX_MIN_HEIGHT:
                     info.addAttr(new MinHeightAttr(pxVal, baseWidth, baseHeight));
+                    break;
+                case INDEX_HORIZONTAL_SPACING:
+                    info.addAttr(new GridHorizontalSpacingAttr(pxVal, baseWidth, baseHeight));
                     break;
             }
         }
