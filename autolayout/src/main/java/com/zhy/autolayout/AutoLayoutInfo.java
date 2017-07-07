@@ -149,7 +149,7 @@ public class AutoLayoutInfo
         {
             autoLayoutInfo.addAttr(GridHorizontalSpacingAttr.generate(
                     getHorizontalSpacing((GridView) view), base
-            );
+            ));
         }
         return autoLayoutInfo;
     }
